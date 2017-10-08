@@ -256,7 +256,7 @@ public class UnidadPersonal extends JFrame{
 			if(hora2<14 && hora2 >=8) {
 				turno="M";
 			}
-			else if(hora2>=14 && hora2<20) {
+			else if(hora2>=14 && hora2<22) {
 				turno="T";
 			}
 
