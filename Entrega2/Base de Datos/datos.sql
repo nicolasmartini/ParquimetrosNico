@@ -92,7 +92,7 @@ INSERT INTO Estacionamientos VALUES (0009,9,'2014:07:19','18:40:00','2014:07:20'
 INSERT INTO Estacionamientos VALUES (0010,10,'2014:08:03','10:15:05',NULL,NULL);
 
 #Se insertan datos a la tabla Asociado_con
-INSERT INTO Asociado_con VALUES (1,98244, "Sarmiento", 844, 'Lu', 'M');
+INSERT INTO Asociado_con VALUES (1,98244, "Sarmiento", 844, 'Lu', 'T');
 INSERT INTO Asociado_con VALUES (2,94124, "Estomba", 433, 'Ma', 'M');
 INSERT INTO Asociado_con VALUES (3,75521, "Estomba", 782, 'Mi', 'M');
 INSERT INTO Asociado_con VALUES (4,68322, "Estomba", 782, 'Ju', 'M');
