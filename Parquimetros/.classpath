@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Nicolás Martini/Desktop/forms-1.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nicolás Martini/Desktop/mysql-connector-java-5.1.32-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nicolás Martini/Desktop/quicktable-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nicolás Martini/Desktop/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Usuarios/Flia. Lencina/Biblioteca/Documentos/programas pablo/Elementos de Bases de Datos/Cursada 2017/ParquimetrosNico/forms-1.0.4.jar"/>
+	<classpathentry kind="lib" path="D:/Usuarios/Flia. Lencina/Biblioteca/Documentos/programas pablo/Elementos de Bases de Datos/Cursada 2017/ParquimetrosNico/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="D:/Usuarios/Flia. Lencina/Biblioteca/Documentos/programas pablo/Elementos de Bases de Datos/Cursada 2017/ParquimetrosNico/mysql-connector-java-5.1.32-bin.jar"/>
+	<classpathentry kind="lib" path="D:/Usuarios/Flia. Lencina/Biblioteca/Documentos/programas pablo/Elementos de Bases de Datos/Cursada 2017/ParquimetrosNico/quicktable-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

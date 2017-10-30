@@ -110,7 +110,7 @@ public class Inspector extends JFrame {
 
 		 			else
 		 			{
-		 				JOptionPane.showMessageDialog(null, "Password o usuario Invalido");
+		 				 JOptionPane.showMessageDialog(null, "El usuario o la contraseña es incorrecto","Error de ingreso",JOptionPane.ERROR_MESSAGE);
 		 				 textField.setText("");
 				    	 textContraseña.setText("");
 		 	

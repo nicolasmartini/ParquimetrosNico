@@ -29,7 +29,7 @@ public class Gui {
 	private JTextField consulta;
 	private ConexionMySQL conexion;
 	private DBTable tabla;
-	private JTextArea textArea,textArea_1;
+	private JTextArea textArea,textArea_1; 
 	private JList<String> list;
 
 	/**
@@ -214,8 +214,10 @@ public class Gui {
 	      	}else{
 	      			java.sql.Statement stm= conexion.getConnection().createStatement();
 	      			stm.execute(con);
+	      			if ((con.charAt(0)=='C') || (con.charAt(0)=='c'))
+	      			   list.setListData(conexion.obtenerTablas());
 	      			stm.close();
-	      			textArea.setText(textArea.getText()+"insert/update/delete realizado con éxito\n\n");
+	      			textArea.setText(textArea.getText()+"La operación fue realizada con éxito\n\n");
 	      		}
 	    	  
 	    	  

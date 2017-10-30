@@ -25,7 +25,7 @@ public class ConexionMySQL  {
 
        }catch(Exception ex){
 
-           JOptionPane.showMessageDialog(null, ex);
+           JOptionPane.showMessageDialog(null, "El usuario o la contraseña es incorrecto","Error de ingreso",JOptionPane.ERROR_MESSAGE);
 
        }
 
@@ -64,7 +64,7 @@ public class ConexionMySQL  {
 	 try{	
 			// Se crea una sentencia jdbc para realizar la consulta
 			java.sql.Statement stmt = conexion.createStatement();
-			toReturn= new String[12];
+			toReturn= new String[20];
 			// Se prepara el string SQL de la consulta
 			String sql = "SHOW TABLES;" ; 
 		

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="D:\Usuarios\Flia. Lencina\Biblioteca\Documentos\programas pablo\Elementos de Bases de Datos\Cursada 2017\ParquimetrosNico" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\Nicolás Martini\Documents\GitHub\ParquimetrosNico" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="Usuario - Parquimetros" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
@@ -21,6 +22,9 @@
 		<item value="false" key="linkWithEditor"/>
 	</section>
 	<section name="quick_assist_proposal_size">
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="3" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>
