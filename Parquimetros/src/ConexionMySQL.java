@@ -62,9 +62,24 @@ public class ConexionMySQL  {
    public String[] obtenerTablas(){
 	 String[] toReturn=null;
 	 try{	
+		 
+			// Se crea una sentencia jdbc para realizar la consulta
+			java.sql.Statement stmt1 = conexion.createStatement();				
+			// Se prepara el string SQL de la consulta
+			String sql1 = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'parquimetros';" ; 
+				
+			// Se ejecuta la sentencia y se recibe un resultado
+			java.sql.ResultSet rs1 = stmt1.executeQuery(sql1);
+			int cantTablas =0;
+			while (rs1.next()) 
+			{
+				cantTablas=rs1.getInt("Count(*)");
+		 
+			}
+		 
 			// Se crea una sentencia jdbc para realizar la consulta
 			java.sql.Statement stmt = conexion.createStatement();
-			toReturn= new String[20];
+			toReturn= new String[cantTablas];
 			// Se prepara el string SQL de la consulta
 			String sql = "SHOW TABLES;" ; 
 		
