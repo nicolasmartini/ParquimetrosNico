@@ -319,8 +319,6 @@ public class UnidadPersonal extends JFrame{
 			String ins = "INSERT INTO multa(fecha,hora,patente,id_asociado_con) VALUES(?,?,?,?);";
 			// Se crea un sentencia preparada
 			java.sql.PreparedStatement stmt2 = conexion.prepareStatement(ins);
-			int flag=0;
-			String patenteslist="";
 			for(int i = 0 ; i < patentes.size() ; i++) {
 				pat = patentes.elementAt(i).toString();
 				
@@ -329,6 +327,7 @@ public class UnidadPersonal extends JFrame{
 				// Se prepara el string SQL de la consulta
 				sql1 = "select * from estacionados where patente= '" +pat+ "' and calle = '"+calle+"' and altura = "+altura+";";
 				rs = stmt.executeQuery(sql1);
+				
 				if(!rs.next()) {
 					// Se ligan los parámetros efectivos
 					stmt2.setDate(1, fecha);
@@ -336,18 +335,15 @@ public class UnidadPersonal extends JFrame{
 					stmt2.setString(3, pat);
 					stmt2.setInt(4, id);
 					stmt2.executeUpdate();
+				}else {
+					System.out.println("no corresponde multar"+pat);
 				}
-				else {
-					  flag++;
-					  patenteslist=patenteslist + ", " + pat;
-				     }
+				
+				
 			}
-		    refrescarTablaMultas(fecha,hora,id);
+			refrescarTablaMultas(fecha,hora,id);
 			stmt2.close();
-			if (flag>0)
-			{
-				JOptionPane.showMessageDialog(this,"No corrresponde multar a la/s patentes " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
-			}
+			
 			
 		}
 		catch (java.sql.SQLException ex) {
@@ -421,9 +417,10 @@ public class UnidadPersonal extends JFrame{
 	
 	protected void actualizarIds(String u, String l) {
 		String[] uc = u.split(" ", 2);
-		ids.removeAllElements();
+		//ids.removeAllElements();
 		try
-		{
+		{ids.removeAllElements();
+
 			// Se crea una sentencia jdbc para realizar la consulta
 			java.sql.Statement stmt = conexion.createStatement();
 
@@ -472,10 +469,14 @@ public class UnidadPersonal extends JFrame{
 
 			while(rs.next())
 			{
-				toRet.addElement(rs.getString("calle")+" "+rs.getString("altura"));							
-			}			
+				toRet.addElement(rs.getString("calle")+" "+rs.getString("altura"));
+				
+				
+			}
+
+			
 		}
-		catch (java.sql.SQLException ex) {System.out.println(ex.getMessage());}
+		catch (java.sql.SQLException ex) {}
 
 
 

@@ -320,7 +320,6 @@ public class UnidadPersonal extends JFrame{
 			// Se crea un sentencia preparada
 			java.sql.PreparedStatement stmt2 = conexion.prepareStatement(ins);
 			int flag=0;
-			String patenteslist="";
 			for(int i = 0 ; i < patentes.size() ; i++) {
 				pat = patentes.elementAt(i).toString();
 				
@@ -337,17 +336,15 @@ public class UnidadPersonal extends JFrame{
 					stmt2.setInt(4, id);
 					stmt2.executeUpdate();
 				}
-				else {
-					  flag++;
-					  patenteslist=patenteslist + ", " + pat;
-				     }
+				else flag++;
+			}
+			if (flag>0)
+			{
+				JOptionPane.showMessageDialog(this,"No corrresponde multar a algunas de las patentes ingresadas.\n","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 			}
 		    refrescarTablaMultas(fecha,hora,id);
 			stmt2.close();
-			if (flag>0)
-			{
-				JOptionPane.showMessageDialog(this,"No corrresponde multar a la/s patentes " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
-			}
+			
 			
 		}
 		catch (java.sql.SQLException ex) {
