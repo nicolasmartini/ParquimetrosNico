@@ -40,16 +40,16 @@ INSERT INTO Tarjetas VALUES(0009,220.00,"Discapacitado","SYO123");
 INSERT INTO Tarjetas VALUES(0010,050.50,"Estudiante","WTP123");
 
 #Se insertan datos a la tabla Inspectores
-INSERT INTO Inspectores VALUES (98244, 154182544, "Luis", "Gonzales",md5("1234"));
-INSERT INTO Inspectores VALUES (94124, 156902312, "Roberto", "Piermarocchi",md5("1234"));
-INSERT INTO Inspectores VALUES (75521, 155982731, "Juan", "Torroba",md5("1234"));
-INSERT INTO Inspectores VALUES (68322, 154982031, "Walter", "Barbagelata",md5("1234"));
-INSERT INTO Inspectores VALUES (58231, 156098291, "Sergio", "Gomez",md5("1234"));
-INSERT INTO Inspectores VALUES (75284, 154809213, "Alejandro", "Napoli",md5("1234"));
-INSERT INTO Inspectores VALUES (54274, 155098203, "Adriana", "Castanio",md5("1234"));
-INSERT INTO Inspectores VALUES (58812, 154182666, "Sonia", "Ballesteros",md5("1234"));
-INSERT INTO Inspectores VALUES (47241, 155631289, "Gustavo", "Agenta",md5("1234"));
-INSERT INTO Inspectores VALUES (78234, 156871211, "Carlos", "Perez",md5("1234"));
+INSERT INTO Inspectores VALUES (98244, 154182544, "Luis", "Gonzales",md5("inspector"));
+INSERT INTO Inspectores VALUES (94124, 156902312, "Roberto", "Piermarocchi",md5("inspector"));
+INSERT INTO Inspectores VALUES (75521, 155982731, "Juan", "Torroba",md5("inspector"));
+INSERT INTO Inspectores VALUES (68322, 154982031, "Walter", "Barbagelata",md5("inspector"));
+INSERT INTO Inspectores VALUES (58231, 156098291, "Sergio", "Gomez",md5("inspector"));
+INSERT INTO Inspectores VALUES (75284, 154809213, "Alejandro", "Napoli",md5("inspector"));
+INSERT INTO Inspectores VALUES (54274, 155098203, "Adriana", "Castanio",md5("inspector"));
+INSERT INTO Inspectores VALUES (58812, 154182666, "Sonia", "Ballesteros",md5("inspector"));
+INSERT INTO Inspectores VALUES (47241, 155631289, "Gustavo", "Agenta",md5("inspector"));
+INSERT INTO Inspectores VALUES (78234, 156871211, "Carlos", "Perez",md5("inspector"));
 
 #Se insertan datos a la tabla Ubicaciones
 INSERT INTO Ubicaciones VALUES ("Sarmiento", 583, 103.44);
@@ -102,6 +102,7 @@ INSERT INTO Asociado_con VALUES (7,54274, "Donado", 583, 'Ma', 'T');
 INSERT INTO Asociado_con VALUES (8,58812, "Donado", 1423, 'Mi', 'T');
 INSERT INTO Asociado_con VALUES (9,47241, "Beruti", 1823, 'Ju', 'T');
 INSERT INTO Asociado_con VALUES (10,78234, "Beruti", 1724, 'Vi', 'T');
+INSERT INTO Asociado_con VALUES (13,98244, "Sarmiento", 583, 'Ma', 'M');
 
 #Se insertan datos a la tabla Multa
 INSERT INTO Multa VALUES (1,'2014:03:12','13:32:45',"LIL345",1);
