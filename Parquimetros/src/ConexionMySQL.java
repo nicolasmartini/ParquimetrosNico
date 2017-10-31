@@ -70,10 +70,13 @@ public class ConexionMySQL  {
 		
 			// Se ejecuta la sentencia y se recibe un resultado
 			java.sql.ResultSet rs = stmt.executeQuery(sql);
+	
 			int pos=0;
 			while(rs.next())
-			{
+			{   
+				
 				toReturn[pos++]=(rs.getString("Tables_in_parquimetros"));
+		
 			}
 	 }
 		catch (java.sql.SQLException ex) {System.out.println("Error");}
