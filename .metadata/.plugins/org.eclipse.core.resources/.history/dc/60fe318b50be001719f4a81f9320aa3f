@@ -339,19 +339,15 @@ public class UnidadPersonal extends JFrame{
 				}
 				else {
 					  flag++;
-					  patenteslist=patenteslist + " " + pat;
+					  patenteslist=patenteslist + ", " + pat;
 				     }
 			}
 		    refrescarTablaMultas(fecha,hora,id);
 			stmt2.close();
-			if (flag==1)
+			if (flag>0)
 			{
-				JOptionPane.showMessageDialog(this,"No corrresponde multar a la patente " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this,"No corrresponde multar a la/s patentes " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 			}
-			else if (flag>1)
-			        {
-				      JOptionPane.showMessageDialog(this,"No corrresponde multar a las patentes: " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
-			        }
 			
 		}
 		catch (java.sql.SQLException ex) {

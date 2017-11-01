@@ -350,7 +350,7 @@ public class UnidadPersonal extends JFrame{
 			}
 			else if (flag>1)
 			        {
-				      JOptionPane.showMessageDialog(this,"No corrresponde multar a las patentes: " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+				      JOptionPane.showMessageDialog(this,"No corrresponde multar a las patente: " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 			        }
 			
 		}
