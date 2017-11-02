@@ -461,7 +461,6 @@ public class UnidadPersonal extends JFrame{
 		if(p.trim().length()==6) {
 			patentes.addElement(p);
 		}
-		else JOptionPane.showMessageDialog(this,"La patente debe contener 6 caracteres.","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private DefaultComboBoxModel<String> obtenerUbicaciones(String legajo) {
