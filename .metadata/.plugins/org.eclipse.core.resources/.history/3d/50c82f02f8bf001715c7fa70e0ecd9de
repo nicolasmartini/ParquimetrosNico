@@ -352,7 +352,10 @@ public class UnidadPersonal extends JFrame{
 			        {
 				      JOptionPane.showMessageDialog(this,"No corrresponde multar a las patentes: " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 			        }
-			
+
+				
+				
+			}
 			refrescarTablaMultas(fecha,hora,id);
 			stmt2.close();
 			
