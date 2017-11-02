@@ -224,8 +224,6 @@ GRANT SELECT,INSERT ON Parquimetros.Multa TO 'inspector'@'%';
 GRANT SELECT,INSERT ON Parquimetros.Accede TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Inspectores TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Parquimetros TO 'inspector'@'%';
-GRANT SELECT ON Parquimetros.Asociado_con TO 'inspector'@'%';
-GRANT SELECT ON Parquimetros.Ubicaciones TO 'inspector'@'%';
 
 
 

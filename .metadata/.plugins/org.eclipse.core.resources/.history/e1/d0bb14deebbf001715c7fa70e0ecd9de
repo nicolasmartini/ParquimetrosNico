@@ -518,3 +518,164 @@ public class UnidadPersonal extends JFrame{
 	}
 	
 }
+
+	
+	
+	private void refrescarTablaMultas(Date fecha, String hora, int id) {
+		try	
+		{    
+			tabla.connectDatabase(conMySQL.getdriver(),conMySQL.uri(),conMySQL.getUser(),conMySQL.getPass());
+			conMySQL.Conectar("inspector", "inspector");
+			String sql = "select numero, fecha, hora, calle, altura, patente,legajo from multa natural join asociado_con where fecha = '"+
+					fecha +"' and hora = '"+hora+"' and id_asociado_con = "+id+";";
+			// seteamos la consulta a partir de la cual se obtendr�n los datos para llenar la tabla
+			tabla.setSelectSql(sql.trim());
+
+			// obtenemos el modelo de la tabla a partir de la consulta para 
+			// modificar la forma en que se muestran de algunas columnas  
+			tabla.createColumnModelFromQuery();    	    
+			for (int i = 0; i < tabla.getColumnCount(); i++)
+			{ // para que muestre correctamente los valores de tipo TIME (hora)  		   		  
+				if	 (tabla.getColumn(i).getType()==Types.TIME)  
+				{    		 
+					tabla.getColumn(i).setType(Types.CHAR);  
+				}
+				// cambiar el formato en que se muestran los valores de tipo DATE
+				if	 (tabla.getColumn(i).getType()==Types.DATE)
+				{
+					tabla.getColumn(i).setDateFormat("dd/MM/YYYY");
+				}
+			}  
+			// actualizamos el contenido de la tabla.   	     	  
+			tabla.refresh();
+			// No es necesario establecer  una conexi�n, crear una sentencia y recuperar el 
+			// resultado en un resultSet, esto lo hace autom�ticamente la tabla (DBTable) a 
+			// patir  de  la conexi�n y la consulta seteadas con connectDatabase() y setSelectSql() respectivamente.
+
+
+
+		}
+		catch (SQLException ex)
+		{	JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this),
+					ex.getMessage() + "\n", 
+					"Error al ejecutar la consulta.",
+					JOptionPane.ERROR_MESSAGE);
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	protected void botonLimpiarAccion() {
+		patentes.removeAllElements();
+	}
+	protected void botonBorrarAccion() {
+		patentes.removeElement(list.getSelectedValue());
+	}
+	
+	protected void btnVolverActionPerformed(ActionEvent a){
+		
+		setVisible(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Inspector i= new Inspector();
+	}
+	
+	protected void actualizarIds(String u, String l) {
+		String[] uc = u.split(" ", 2);
+		ids.removeAllElements();
+		try
+		{
+			// Se crea una sentencia jdbc para realizar la consulta
+			java.sql.Statement stmt = conexion.createStatement();
+
+			// Se prepara el string SQL de la consulta
+			String sql = "SELECT id_parq FROM ubicaciones NATURAL JOIN parquimetros WHERE  calle = '" + uc[0] +"' AND altura = '" + uc[1]+ "';"; 
+			// Se ejecuta la sentencia y se recibe un resultado
+			java.sql.ResultSet rs = stmt.executeQuery(sql);
+
+
+			while(rs.next())
+			{
+				ids.addElement(rs.getString("id_parq"));
+				
+			}
+
+
+		}
+		catch (java.sql.SQLException ex) {System.out.println(ex.getMessage());}
+
+
+
+	}
+	
+	protected void botonAgregarAccion(String p) {	
+		
+		if(p.trim().length()==6) {
+			patentes.addElement(p);
+		}
+	}
+	
+	private DefaultComboBoxModel<String> obtenerUbicaciones(String legajo) {
+		DefaultComboBoxModel<String> toRet = new DefaultComboBoxModel<String>();
+
+		try
+		{
+
+			// Se crea una sentencia jdbc para realizar la consulta
+			java.sql.Statement stmt = conexion.createStatement();
+
+			// Se prepara el string SQL de la consulta
+			String sql = "SELECT DISTINCT calle, altura FROM asociado_con WHERE legajo = '" + legajo + "';"; 
+
+			// Se ejecuta la sentencia y se recibe un resultado
+			java.sql.ResultSet rs = stmt.executeQuery(sql);
+
+
+			while(rs.next())
+			{
+				toRet.addElement(rs.getString("calle")+" "+rs.getString("altura"));							
+			}			
+		}
+		catch (java.sql.SQLException ex) {System.out.println(ex.getMessage());}
+
+
+
+
+		return toRet;
+	}
+	
+	private DefaultComboBoxModel<String> obtenerNroParquimetros(String calle,String altura) {
+		DefaultComboBoxModel<String> toRet = new DefaultComboBoxModel<String>();
+
+		try
+		{
+
+			// Se crea una sentencia jdbc para realizar la consulta
+			java.sql.Statement stmt = conexion.createStatement();
+
+			// Se prepara el string SQL de la consulta
+			String sql = "SELECT id_parq FROM parquimetros WHERE calle = '" + calle + "' and altura ='"+altura+"'';"; 
+
+			// Se ejecuta la sentencia y se recibe un resultado
+			java.sql.ResultSet rs = stmt.executeQuery(sql);
+
+
+			while(rs.next())
+			{
+				toRet.addElement(rs.getString("id_parq"));
+				
+				
+			}
+
+
+		}
+		catch (java.sql.SQLException ex) {}
+
+
+
+
+		return toRet;
+	}
+	
+}

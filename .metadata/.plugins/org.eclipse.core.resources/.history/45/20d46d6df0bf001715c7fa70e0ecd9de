@@ -73,7 +73,7 @@ public class UnidadPersonal extends JFrame{
 			getContentPane().setLayout(null);
 
 			panelInspector = new JPanel();
-			panelInspector.setBackground(Color.BLACK);
+			panelInspector.setBackground(Color.WHITE);
 			panelInspector.setForeground(Color.BLACK);
 			panelInspector.setVisible(false);
 			panelInspector.setPreferredSize(new Dimension(800,600));
@@ -128,7 +128,7 @@ public class UnidadPersonal extends JFrame{
 
 			txtPatente = new JFormattedTextField(new MaskFormatter("******"));
 			txtPatente.setText("");
-			txtPatente.setBounds(515, 489, 86, 20);
+			txtPatente.setBounds(515, 489, 86, 25);
 			panelInspector.add(txtPatente);
 			txtPatente.setColumns(10);
 
@@ -420,12 +420,11 @@ public class UnidadPersonal extends JFrame{
 		ids.removeAllElements();
 		try
 		{
-
 			// Se crea una sentencia jdbc para realizar la consulta
 			java.sql.Statement stmt = conexion.createStatement();
 
 			// Se prepara el string SQL de la consulta
-			String sql = "SELECT id_parq FROM ubicaciones natural join parquimetros WHERE  calle = '" + uc[0] +"' and altura = '" + uc[1]+ "';"; 
+			String sql = "SELECT id_parq FROM ubicaciones NATURAL JOIN parquimetros WHERE  calle = '" + uc[0] +"' AND altura = '" + uc[1]+ "';"; 
 			// Se ejecuta la sentencia y se recibe un resultado
 			java.sql.ResultSet rs = stmt.executeQuery(sql);
 
@@ -438,7 +437,7 @@ public class UnidadPersonal extends JFrame{
 
 
 		}
-		catch (java.sql.SQLException ex) {}
+		catch (java.sql.SQLException ex) {System.out.println(ex.getMessage());}
 
 
 
@@ -469,14 +468,10 @@ public class UnidadPersonal extends JFrame{
 
 			while(rs.next())
 			{
-				toRet.addElement(rs.getString("calle")+" "+rs.getString("altura"));
-				
-				
-			}
-
-			
+				toRet.addElement(rs.getString("calle")+" "+rs.getString("altura"));							
+			}			
 		}
-		catch (java.sql.SQLException ex) {}
+		catch (java.sql.SQLException ex) {System.out.println(ex.getMessage());}
 
 
 
