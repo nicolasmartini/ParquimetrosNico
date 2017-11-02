@@ -338,12 +338,26 @@ public class UnidadPersonal extends JFrame{
 				}else {
 					System.out.println("no corresponde multar"+pat);
 				}
+<<<<<<< HEAD
 				
 				
+=======
+				else {
+					  flag++;
+					  patenteslist=patenteslist + ", " + pat;
+				     }
+>>>>>>> parent of 74c23a6... Arreglo simple
 			}
 			refrescarTablaMultas(fecha,hora,id);
 			stmt2.close();
+<<<<<<< HEAD
 			
+=======
+			if (flag>0)
+			{
+				JOptionPane.showMessageDialog(this,"No corrresponde multar a la/s patentes " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+			}
+>>>>>>> parent of 74c23a6... Arreglo simple
 			
 		}
 		catch (java.sql.SQLException ex) {
