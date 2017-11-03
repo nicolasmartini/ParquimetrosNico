@@ -1,3 +1,5 @@
+DROP DATABASE Parquimetros;
+
 #Se crea la base de datos con el nombre Parquimetros
 CREATE DATABASE Parquimetros;
 
@@ -195,6 +197,28 @@ create table Multa(
 
 ) ENGINE=InnoDB;
 
+create table Ventas(
+
+	id_tarjeta INT UNSIGNED AUTO_INCREMENT NOT NULL ,
+	tipo_tarjeta VARCHAR(40) NOT NULL,
+	saldo DECIMAL(5,2) NOT NULL,
+	fecha DATE NOT NULL ,
+	hora TIME NOT NULL ,
+	
+	CONSTRAINT Pk_Ventas
+	PRIMARY KEY (id_tarjeta,fecha,hora),
+	
+	CONSTRAINT FK_ventas_idTarjeta 
+	 FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas (id_tarjeta) 
+	  ON DELETE RESTRICT ON UPDATE CASCADE,
+	  
+	  	CONSTRAINT FK_ventas_tipoTarjeta 
+	 FOREIGN KEY (tipo_tarjeta) REFERENCES Tarjetas (tipo) 
+	  ON DELETE RESTRICT ON UPDATE CASCADE	  
+
+
+) ENGINE=InnoDB;
+
 #----------------------------------------------------------------------------------------------
 #Se crea una vista
 		
@@ -205,6 +229,87 @@ CREATE VIEW Estacionados AS
         
    WHERE e.fecha_sal is NULL and e.hora_sal is NULL;
    
+#----------------------------------------------------------------------------------------------
+DELIMITER !
+CREATE PROCEDURE conectar(IN id_tarjeta INTEGER , IN id_parq INTEGER)
+BEGIN		
+
+	DECLARE saldo_actual DECIMAL(16,2);
+	DECLARE tarif DECIMAL(16,2);
+	DECLARE des DECIMAL(16,2);
+	DECLARE fecha_apertura DATE;
+	DECLARE hora_apertura TIME;
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SELECT 'SQLEXCEPTION!, Transacción cancelada' AS Resultado;
+		ROLLBACK;
+	END;
+	START TRANSACTION;
+	
+	#IF EXISTS (SELECT * FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta) THEN
+	#	IF EXISTS (SELECT * FROM parquimetros AS P WHERE P.id_parq = id_parq) THEN
+     #      	SELECT tarifa AS tarif FROM ubicaciones NATURAL JOIN parquimetros;
+		#	SELECT descuento AS des FROM tarjetas NATURAL JOIN tipos_tarjeta;
+			
+			IF EXISTS (SELECT * FROM Estacionamientos AS x  WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL)  THEN
+			    
+				#	UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
+				#	SELECT fecha_ent AS fecha_apertura,hora_ent AS hora_apertura FROM Estacionamientos AS E WHERE  E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
+				#	CALL calcularTiempoCierre(fecha_apertura,hora_apertura,@tiempo);
+				#	SELECT saldo AS saldo_actual FROM Tarjetas AS T WHERE T.id_tarjeta = id_tarjeta ; 
+				#	CALL calcularSaldo(saldo_actual,@tiempo,tarif,des);
+				#	UPDATE Tarjetas AS T SET saldo = saldo_actual WHERE T.id_tarjeta = id_tarjeta ; 
+				#	SELECT 'CIERRE' AS operacion, @tiempo AS tiempo,saldo_actual AS saldo ; 
+			
+				#ELSE IF	EXISTS ( SELECT saldo AS saldo_actual FROM Tarjetas AS T WHERE T.id_tarjeta = id_tarjeta AND T.saldo >0 ) THEN 				
+					#No esta estacionado, corresponde abrir					
+
+				#		INSERT INTO Estacionamientos (id_tarjeta,id_parq,fecha_ent,hora_ent,fecha_sal,hora_sal) VALUES (id_tarjeta,id_parq,CURDATE(),CURTIME(),NULL,NULL);
+				#		CALL calcularTiempoApertura(saldo_actual,tarif,des,@tiempo);
+				#ELSE
+				#	SELECT 'Error saldo insuficiente' AS Resultado;
+				
+				END IF;
+			#END IF;
+		#ELSE
+		#	SELECT 'Error el parquimetro no existe' AS Resultado;
+		#END IF;
+	#ELSE
+	#	SELECT 'Error la tarjeta no existe' AS Resultado;
+	#END IF;
+COMMIT;
+END; !
+
+DELIMITER !
+CREATE PROCEDURE calcularTiempoApertura(IN saldo DECIMAL(16,2), IN tarifa DECIMAL(16,2), IN descuento DECIMAL(16,2), OUT tiempo DECIMAL(16,2) )
+BEGIN
+
+	IF (tarifa > 0) THEN 		
+		SET tiempo = saldo / (tarifa * (1-descuento));		
+	ELSE
+		SELECT 'Error no existe valor de tarifa;' AS Resultado;
+	END IF;
+
+END;!	
+
+DELIMITER !
+CREATE PROCEDURE calcularTiempoCierre(IN fecha_apertura DATE, IN hora_apertura TIME, OUT tiempo DECIMAL(16,2))
+BEGIN
+
+    SET tiempo = TIMESTAMPDIFF(MINUTE,TIMESTAMP(fecha_apertura,hora_apertura),TIMESTAMP(CURDATE(),CURTIME()));
+
+END;!
+
+DELIMITER !
+CREATE PROCEDURE calcularSaldo(INOUT saldo INT, IN tiempo TIME, IN tarifa DECIMAL(16,2), IN descuento DECIMAL(16,2) )
+BEGIN
+
+    SET saldo = saldo - (tiempo * (tarifa * (1-descuento))) ;
+
+END;!	
+	
+
+	
 #----------------------------------------------------------------------------------------------
 #Se crean los usuarios y se le otorgan los privelegios
 
@@ -224,6 +329,11 @@ GRANT SELECT,INSERT ON Parquimetros.Multa TO 'inspector'@'%';
 GRANT SELECT,INSERT ON Parquimetros.Accede TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Inspectores TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Parquimetros TO 'inspector'@'%';
+GRANT SELECT ON Parquimetros.Asociado_con TO 'inspector'@'%';
+GRANT SELECT ON Parquimetros.Ubicaciones TO 'inspector'@'%';
+
+#Usuario parquimetro que tiene privelegios minimos.
+#GRANT SELECT ON Parquimetros.Ejecutar TO 'paquimetro'@'%' IDENTIFIED BY 'parq';
 
 
 
