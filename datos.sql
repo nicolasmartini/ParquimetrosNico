@@ -28,7 +28,7 @@ INSERT INTO Tipos_tarjeta VALUES("Discapacitado",0.20);
 INSERT INTO Tipos_tarjeta VALUES("Estudiante",0.05);
 
 #Se insertan datos a la tabla Tarjeta
-INSERT INTO Tarjetas VALUES(0001,001.50,"Jubilado","LIL345");
+INSERT INTO Tarjetas VALUES(0001,50,"Jubilado","LIL345");
 INSERT INTO Tarjetas VALUES(0002,020.00,"Estudiante","SXV456");
 INSERT INTO Tarjetas VALUES(0003,020.00,"Jubilado","SML123");
 INSERT INTO Tarjetas VALUES(0004,020.00,"Discapacitado","AQP678");
@@ -40,20 +40,20 @@ INSERT INTO Tarjetas VALUES(0009,220.00,"Discapacitado","SYO123");
 INSERT INTO Tarjetas VALUES(0010,050.50,"Estudiante","WTP123");
 
 #Se insertan datos a la tabla Inspectores
-INSERT INTO Inspectores VALUES (98244, 154182544, "Luis", "Gonzales",md5("1234"));
-INSERT INTO Inspectores VALUES (94124, 156902312, "Roberto", "Piermarocchi",md5("1234"));
-INSERT INTO Inspectores VALUES (75521, 155982731, "Juan", "Torroba",md5("1234"));
-INSERT INTO Inspectores VALUES (68322, 154982031, "Walter", "Barbagelata",md5("1234"));
-INSERT INTO Inspectores VALUES (58231, 156098291, "Sergio", "Gomez",md5("1234"));
-INSERT INTO Inspectores VALUES (75284, 154809213, "Alejandro", "Napoli",md5("1234"));
-INSERT INTO Inspectores VALUES (54274, 155098203, "Adriana", "Castanio",md5("1234"));
-INSERT INTO Inspectores VALUES (58812, 154182666, "Sonia", "Ballesteros",md5("1234"));
-INSERT INTO Inspectores VALUES (47241, 155631289, "Gustavo", "Agenta",md5("1234"));
-INSERT INTO Inspectores VALUES (78234, 156871211, "Carlos", "Perez",md5("1234"));
+INSERT INTO Inspectores VALUES (98244, 154182544, "Luis", "Gonzales",md5("inspector"));
+INSERT INTO Inspectores VALUES (94124, 156902312, "Roberto", "Piermarocchi",md5("inspector"));
+INSERT INTO Inspectores VALUES (75521, 155982731, "Juan", "Torroba",md5("inspector"));
+INSERT INTO Inspectores VALUES (68322, 154982031, "Walter", "Barbagelata",md5("inspector"));
+INSERT INTO Inspectores VALUES (58231, 156098291, "Sergio", "Gomez",md5("inspector"));
+INSERT INTO Inspectores VALUES (75284, 154809213, "Alejandro", "Napoli",md5("inspector"));
+INSERT INTO Inspectores VALUES (54274, 155098203, "Adriana", "Castanio",md5("inspector"));
+INSERT INTO Inspectores VALUES (58812, 154182666, "Sonia", "Ballesteros",md5("inspector"));
+INSERT INTO Inspectores VALUES (47241, 155631289, "Gustavo", "Agenta",md5("inspector"));
+INSERT INTO Inspectores VALUES (78234, 156871211, "Carlos", "Perez",md5("inspector"));
 
 #Se insertan datos a la tabla Ubicaciones
-INSERT INTO Ubicaciones VALUES ("Sarmiento", 583, 103.44);
-INSERT INTO Ubicaciones VALUES ("Sarmiento", 844, 102.45);
+INSERT INTO Ubicaciones VALUES ("Sarmiento", 583, 0.5);
+INSERT INTO Ubicaciones VALUES ("Sarmiento", 844, 0.5);
 INSERT INTO Ubicaciones VALUES ("Estomba", 433, 102.42);
 INSERT INTO Ubicaciones VALUES ("Estomba", 782 , 102.44);
 INSERT INTO Ubicaciones VALUES ("Chiclana", 1289, 103.35);
@@ -80,7 +80,7 @@ INSERT INTO Parquimetros VALUES (11,22,"Colon", 1832);
 INSERT INTO Parquimetros VALUES (12,24,"Colon", 1932);
 
 #Se insertan datos a la tabla Estacionamientos
-INSERT INTO Estacionamientos VALUES (0001,1,'2014:03:12','13:32:45',NULL,NULL);
+INSERT INTO Estacionamientos VALUES (0001,1,'2017:11:6','18:00:00',NULL,NULL);
 INSERT INTO Estacionamientos VALUES (0002,2,'2014:03:20','13:32:45','2014:03:20','18:40:00');
 INSERT INTO Estacionamientos VALUES (0003,3,'2014:04:27','09:30:00',NULL,NULL);
 INSERT INTO Estacionamientos VALUES (0004,4,'2014:05:02','07:32:32',NULL,NULL);
@@ -102,6 +102,7 @@ INSERT INTO Asociado_con VALUES (7,54274, "Donado", 583, 'Ma', 'T');
 INSERT INTO Asociado_con VALUES (8,58812, "Donado", 1423, 'Mi', 'T');
 INSERT INTO Asociado_con VALUES (9,47241, "Beruti", 1823, 'Ju', 'T');
 INSERT INTO Asociado_con VALUES (10,78234, "Beruti", 1724, 'Vi', 'T');
+INSERT INTO Asociado_con VALUES (13,98244, "Sarmiento", 583, 'Ma', 'M');
 
 #Se insertan datos a la tabla Multa
 INSERT INTO Multa VALUES (1,'2014:03:12','13:32:45',"LIL345",1);

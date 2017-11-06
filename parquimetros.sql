@@ -235,10 +235,7 @@ CREATE PROCEDURE conectar(IN id_tarjeta INTEGER , IN id_parq INTEGER)
 BEGIN		
 
 	DECLARE saldo_actual DECIMAL(16,2);
-	DECLARE tarif DECIMAL(16,2);
-	DECLARE des DECIMAL(16,2);
-	DECLARE fecha_apertura DATE;
-	DECLARE hora_apertura TIME;
+	DECLARE tiemp INT; 
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		SELECT 'SQLEXCEPTION!, Transacción cancelada' AS Resultado;
@@ -246,41 +243,43 @@ BEGIN
 	END;
 	START TRANSACTION;
 	
-	#IF EXISTS (SELECT * FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta) THEN
-	#	IF EXISTS (SELECT * FROM parquimetros AS P WHERE P.id_parq = id_parq) THEN
-     #      	SELECT tarifa AS tarif FROM ubicaciones NATURAL JOIN parquimetros;
-		#	SELECT descuento AS des FROM tarjetas NATURAL JOIN tipos_tarjeta;
+	IF EXISTS (SELECT * FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta) THEN
+		IF EXISTS (SELECT * FROM parquimetros AS P WHERE P.id_parq = id_parq) THEN	   
 			
-			IF EXISTS (SELECT * FROM Estacionamientos AS x  WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL)  THEN
+			IF EXISTS (SELECT * FROM estacionamientos AS E WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL)  THEN
 			    
-				#	UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
-				#	SELECT fecha_ent AS fecha_apertura,hora_ent AS hora_apertura FROM Estacionamientos AS E WHERE  E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
-				#	CALL calcularTiempoCierre(fecha_apertura,hora_apertura,@tiempo);
-				#	SELECT saldo AS saldo_actual FROM Tarjetas AS T WHERE T.id_tarjeta = id_tarjeta ; 
-				#	CALL calcularSaldo(saldo_actual,@tiempo,tarif,des);
-				#	UPDATE Tarjetas AS T SET saldo = saldo_actual WHERE T.id_tarjeta = id_tarjeta ; 
-				#	SELECT 'CIERRE' AS operacion, @tiempo AS tiempo,saldo_actual AS saldo ; 
-			
-				#ELSE IF	EXISTS ( SELECT saldo AS saldo_actual FROM Tarjetas AS T WHERE T.id_tarjeta = id_tarjeta AND T.saldo >0 ) THEN 				
-					#No esta estacionado, corresponde abrir					
-
-				#		INSERT INTO Estacionamientos (id_tarjeta,id_parq,fecha_ent,hora_ent,fecha_sal,hora_sal) VALUES (id_tarjeta,id_parq,CURDATE(),CURTIME(),NULL,NULL);
-				#		CALL calcularTiempoApertura(saldo_actual,tarif,des,@tiempo);
-				#ELSE
-				#	SELECT 'Error saldo insuficiente' AS Resultado;
-				
-				END IF;
-			#END IF;
-		#ELSE
-		#	SELECT 'Error el parquimetro no existe' AS Resultado;
-		#END IF;
-	#ELSE
-	#	SELECT 'Error la tarjeta no existe' AS Resultado;
-	#END IF;
+				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE  E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),(SELECT hora_ent FROM estacionamientos AS E WHERE  E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),tiemp);				 
+				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = id_parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
+				UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
+				UPDATE Tarjetas AS T SET saldo = saldo_actual WHERE T.id_tarjeta = id_tarjeta ; 
+				SELECT 'CIERRE' AS Operacion, tiemp AS Tiempo,saldo_actual AS Saldo ; 
+			ELSE IF	EXISTS ( SELECT saldo AS saldo_actual FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta AND T.saldo >0 ) THEN 				
+					#No esta estacionado, corresponde abrir
+					INSERT INTO estacionamientos (id_tarjeta,id_parq,fecha_ent,hora_ent,fecha_sal,hora_sal) VALUES (id_tarjeta,id_parq,CURDATE(),CURTIME(),NULL,NULL);
+					CALL calcularTiempoApertura((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = id_parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),tiemp);
+					SELECT 'APERTURA' AS Operacion, 'EXITO' AS Resultado, tiemp AS Tiempo ;
+				ELSE
+					SELECT 'Error saldo insuficiente' AS Resultado;				
+				END IF;		
+			END IF;
+		ELSE
+			SELECT 'Error el parquimetro no existe' AS Resultado;
+		END IF;
+	ELSE
+		SELECT 'Error la tarjeta no existe' AS Resultado;
+	END IF;
 COMMIT;
 END; !
 
-DELIMITER !
+CREATE PROCEDURE calcularSaldo(IN saldo DECIMAL(16,2), IN tiempo INT, IN tarifa DECIMAL(16,2), IN descuento DECIMAL(16,2),OUT s DECIMAL(16,2) )
+BEGIN
+    
+    SET s = saldo - (tiempo * tarifa * (1-descuento)) ;
+	SELECT S AS calculosaldo,saldo as saldoviejo;
+
+END;!	
+	
+
 CREATE PROCEDURE calcularTiempoApertura(IN saldo DECIMAL(16,2), IN tarifa DECIMAL(16,2), IN descuento DECIMAL(16,2), OUT tiempo DECIMAL(16,2) )
 BEGIN
 
@@ -292,28 +291,22 @@ BEGIN
 
 END;!	
 
-DELIMITER !
-CREATE PROCEDURE calcularTiempoCierre(IN fecha_apertura DATE, IN hora_apertura TIME, OUT tiempo DECIMAL(16,2))
+
+CREATE PROCEDURE calcularTiempoCierre(IN fecha_apertura DATE, IN hora_apertura TIME, OUT tiempo INT)
 BEGIN
 
-    SET tiempo = TIMESTAMPDIFF(MINUTE,TIMESTAMP(fecha_apertura,hora_apertura),TIMESTAMP(CURDATE(),CURTIME()));
-
+    SET tiempo = TIMESTAMPDIFF(MINUTE,TIMESTAMP(fecha_apertura,hora_apertura),TIMESTAMP(CURDATE(),CURTIME())); 
 END;!
 
-DELIMITER !
-CREATE PROCEDURE calcularSaldo(INOUT saldo INT, IN tiempo TIME, IN tarifa DECIMAL(16,2), IN descuento DECIMAL(16,2) )
-BEGIN
 
-    SET saldo = saldo - (tiempo * (tarifa * (1-descuento))) ;
 
-END;!	
-	
 
 	
 #----------------------------------------------------------------------------------------------
 #Se crean los usuarios y se le otorgan los privelegios
 
-#Administrador con todos los privelegios. 
+#Administrador con todos los privelegios.
+DELIMITER ; 
 GRANT ALL PRIVILEGES ON Parquimetros.* TO admin@localhost 
     IDENTIFIED BY 'admin' WITH GRANT OPTION;
 
