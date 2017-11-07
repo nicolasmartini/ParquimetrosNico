@@ -230,6 +230,8 @@ CREATE VIEW Estacionados AS
    WHERE e.fecha_sal is NULL and e.hora_sal is NULL;
    
 #----------------------------------------------------------------------------------------------
+#Procedimiento conectar
+
 DELIMITER !
 CREATE PROCEDURE conectar(IN id_tarjeta INTEGER , IN id_parq INTEGER)
 BEGIN		
@@ -297,11 +299,16 @@ BEGIN
 
     SET tiempo = TIMESTAMPDIFF(MINUTE,TIMESTAMP(fecha_apertura,hora_apertura),TIMESTAMP(CURDATE(),CURTIME())); 
 END;!
+#----------------------------------------------------------------------------------------------
+#Trigger de ventas
 
+CREATE TRIGGER guardarVentas
+AFTER INSERT ON Tarjetas
+FOR EACH ROW
+BEGIN
+INSERT INTO Ventas (id_tarjeta,tipo,saldo,fecha,hota) VALUES (NEW id_tarjeta,NEW.tipo,NEW.saldo,CURDATE(),CURTIME);
+END;!
 
-
-
-	
 #----------------------------------------------------------------------------------------------
 #Se crean los usuarios y se le otorgan los privelegios
 
@@ -326,7 +333,7 @@ GRANT SELECT ON Parquimetros.Asociado_con TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Ubicaciones TO 'inspector'@'%';
 
 #Usuario parquimetro que tiene privelegios minimos.
-#GRANT SELECT ON Parquimetros.Ejecutar TO 'paquimetro'@'%' IDENTIFIED BY 'parq';
+GRANT SELECT ON Parquimetros.conectar TO 'paquimetro'@'%' IDENTIFIED BY 'parq';
 
 
 
