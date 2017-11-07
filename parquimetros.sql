@@ -306,7 +306,7 @@ CREATE TRIGGER guardarVentas
 AFTER INSERT ON Tarjetas
 FOR EACH ROW
 BEGIN
-INSERT INTO Ventas (id_tarjeta,tipo,saldo,fecha,hota) VALUES (NEW id_tarjeta,NEW.tipo,NEW.saldo,CURDATE(),CURTIME);
+INSERT INTO Ventas (id_tarjeta,tipo_tarjeta,saldo,fecha,hora) VALUES (NEW.id_tarjeta,NEW.tipo,NEW.saldo,CURDATE(),CURTIME());
 END;!
 
 #----------------------------------------------------------------------------------------------
@@ -333,7 +333,7 @@ GRANT SELECT ON Parquimetros.Asociado_con TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Ubicaciones TO 'inspector'@'%';
 
 #Usuario parquimetro que tiene privelegios minimos.
-GRANT SELECT ON Parquimetros.conectar TO 'paquimetro'@'%' IDENTIFIED BY 'parq';
+GRANT EXECUTE ON PROCEDURE Parquimetros.conectar TO 'paquimetro'@'%' IDENTIFIED BY 'parq';
 
 
 
