@@ -40,15 +40,23 @@ public class Usuario extends JFrame {
 		setVisible(true);
 		setBounds(100, 100, 450, 300);
 		JButton Administrador = new JButton("Administrador");
-		Administrador.setBounds(147, 43, 140, 58);
+		Administrador.setBounds(147, 50, 140, 58);
 		getContentPane().add(Administrador);
 		
 		Administrador.addActionListener(new Oyente());
 		
+		
 		JButton Inspector = new JButton("Inspector");
-		Inspector.setBounds(151, 145, 136, 58);
+		Inspector.setBounds(147, 110, 140, 58);
 		getContentPane().add(Inspector);
 		Inspector.addActionListener(new Oyente2());
+		
+		JButton Simulador = new JButton("Usuario");
+		Simulador.setBounds(147, 170, 140, 58);
+		getContentPane().add(Simulador);
+		Simulador.addActionListener(new Oyente3());
+		
+		
 		
 	}
 	
@@ -67,6 +75,14 @@ public class Usuario extends JFrame {
 		 {
 			 setVisible(false);
 		     Inspector l= new Inspector();   
+		     }
+		}
+	 
+	 private class Oyente3 implements ActionListener{
+		 public void actionPerformed(ActionEvent e)
+		 {
+			 setVisible(false);			 
+			 Simulador l= new Simulador("parquimetro","parq");   
 		     }
 		}
 }
