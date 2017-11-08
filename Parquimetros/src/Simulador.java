@@ -151,11 +151,6 @@ public class Simulador extends JFrame {
 		JLabel lblParquimetros = new JLabel("Parquimetros");
 		lblParquimetros.setBounds(379, 11, 85, 14);
 		contentPane.add(lblParquimetros);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(10, 218, 477, 198);
-		contentPane.add(panel_3);
-        panel_3.setLayout(null);		
 
 	}
 	
@@ -187,12 +182,12 @@ public class Simulador extends JFrame {
 			if (operacion.equals("CIERRE")) {
 				   tiempo=rs.getString("Tiempo");
 				   saldo=rs.getString("Saldo");
-				   JOptionPane.showMessageDialog(this,"ESTUVO "+ tiempo +" MINUTOS ESTACIONADO Y LE QUEDA DE SALDO "+ saldo +".");
+				   JOptionPane.showMessageDialog(this,"ESTUVO "+ tiempo +" MINUTOS ESTACIONADO. SU SALDO ACTUAL "+ saldo +".");
 			}
 			else if (operacion.equals("APERTURA")) {
 			        resultado=rs.getString("Resultado");
 			        tiempo=rs.getString("Tiempo");
-			        JOptionPane.showMessageDialog(this,"LA APERTURA SE REALIZO CON "+ resultado +", TIENE "+ tiempo +" MINUTOS PARA ESTAR ESTACIONADO.");
+			        JOptionPane.showMessageDialog(this,"LA APERTURA SE REALIZO CON "+ resultado +". TIENE "+ tiempo +" MINUTOS PARA ESTAR ESTACIONADO.");
 			       }	
 			    else JOptionPane.showMessageDialog(this,operacion);
 		    
