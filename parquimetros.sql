@@ -336,6 +336,7 @@ GRANT SELECT ON Parquimetros.Ubicaciones TO 'parquimetro'@'%';
 GRANT SELECT ON Parquimetros.Tarjetas TO 'parquimetro'@'%';
 GRANT SELECT ON Parquimetros.Parquimetros TO 'parquimetro'@'%';
 GRANT UPDATE ON Parquimetros.Estacionamientos TO 'parquimetro'@'%';
+GRANT UPDATE ON Parquimetros.Tarjetas TO 'parquimetro'@'%';
 
 
 
