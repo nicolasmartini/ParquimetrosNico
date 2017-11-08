@@ -158,7 +158,7 @@ public class Simulador extends JFrame {
         panel_3.setLayout(null);
 		
 		
-        /*tabla = new DBTable();
+        tabla = new DBTable();
         tabla.setBounds(10, 5, 456, 193);
         panel_3.add(tabla);
         tabla.getTable().setBounds(3, 28, 300, 0);
@@ -166,11 +166,11 @@ public class Simulador extends JFrame {
        tabla.setEditable(false);       
        tabla.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
        tabla.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-       tabla.setVisible(true);*/
+       tabla.setVisible(true);
 	}
 	
 	
-	/*private void conectar(String parquimetro,String tarjeta)
+	private void conectar(String parquimetro,String tarjeta)
 	{
 	       try {
 	    	   
@@ -186,7 +186,6 @@ public class Simulador extends JFrame {
 		String consulta = "CALL conectar("+tarjeta+","+parquimetro+");";
 		System.out.println(consulta);
 		tabla.setSelectSql(consulta);
-	
 		
 		try {
 			tabla.createColumnModelFromQuery();
@@ -196,46 +195,6 @@ public class Simulador extends JFrame {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage()+"conectar");
 		}
-
-	}*/
-	
-	private void conectar(String parquimetro,String tarjeta)
-	{	String toRet="";
-	  
-	
-		try
-		{
-
-			// Se crea una sentencia jdbc para realizar la consulta
-			java.sql.Statement stmt = conexion.createStatement();
-
-			// Se prepara el string SQL de la consulta
-			String consulta = "CALL conectar("+tarjeta+","+parquimetro+");";; 
-
-			// Se ejecuta la sentencia y se recibe un resultado
-			java.sql.ResultSet rs = stmt.executeQuery(consulta);
-
-            
-			
-			 rs.next();				
-			 String operacion = rs.getString("Operacion");
-			
-			
-			if (toRet.equals("APERTURA")) {
-				
-				toRet = rs.getString("Operacion")+rs.getString("Operacion");
-			}
-
-			//JOptionPane.showMessageDialog(this,toRet);
-			JOptionPane.showMessageDialog(this,toRet);
-		    
-		}
-		catch (Exception ex) {
-			
-			System.out.println(ex.getMessage());
-		}
-
-	
 
 	}
 	

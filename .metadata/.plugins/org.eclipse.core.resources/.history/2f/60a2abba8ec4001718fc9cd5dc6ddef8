@@ -200,9 +200,9 @@ public class Simulador extends JFrame {
 	}*/
 	
 	private void conectar(String parquimetro,String tarjeta)
-	{	String toRet="";
-	  
-	
+	{	
+		String toRet ="";
+		String toRet2 ="";
 		try
 		{
 
@@ -215,25 +215,20 @@ public class Simulador extends JFrame {
 			// Se ejecuta la sentencia y se recibe un resultado
 			java.sql.ResultSet rs = stmt.executeQuery(consulta);
 
-            
-			
-			 rs.next();				
-			 String operacion = rs.getString("Operacion");
-			
-			
-			if (toRet.equals("APERTURA")) {
+
+			while(rs.next())
+			{
 				
-				toRet = rs.getString("Operacion")+rs.getString("Operacion");
+				//toRet = toRet + rs.getString("Resultado") + rs.getString("Operacion") + rs.getString("Tiempo")+rs.getString("Saldo") ;
+				toRet = toRet  + rs.getString("Resultado");
+				//toRet2 = toRet2  + rs.getString("Operacion");
+				System.out.println(toRet);
 			}
 
-			//JOptionPane.showMessageDialog(this,toRet);
-			JOptionPane.showMessageDialog(this,toRet);
+			JOptionPane.showMessageDialog(this,toRet2);
 		    
 		}
-		catch (Exception ex) {
-			
-			System.out.println(ex.getMessage());
-		}
+		catch (java.sql.SQLException ex) {}
 
 	
 
