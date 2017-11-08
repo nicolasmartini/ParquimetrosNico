@@ -238,7 +238,7 @@ BEGIN
 	DECLARE tiemp INT; 
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
-		SELECT 'SQLEXCEPTION!, Transacción cancelada' AS Resultado;
+		SELECT 'SQLEXCEPTION!, Transacción cancelada' AS Operacion;
 		ROLLBACK;
 	END;
 	START TRANSACTION;
@@ -252,21 +252,22 @@ BEGIN
 				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = id_parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
 				UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
 				UPDATE Tarjetas AS T SET saldo = saldo_actual WHERE T.id_tarjeta = id_tarjeta ; 
-				SELECT 'CIERRE' AS Operacion, tiemp AS Tiempo,saldo_actual AS Saldo ; 
+				SELECT 'CIERRE' AS Operacion, tiemp AS Tiempo,saldo_actual AS Saldo ;
+					
 			ELSE IF	EXISTS ( SELECT saldo AS saldo_actual FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta AND T.saldo >0 ) THEN 				
 					#No esta estacionado, corresponde abrir
 					INSERT INTO estacionamientos (id_tarjeta,id_parq,fecha_ent,hora_ent,fecha_sal,hora_sal) VALUES (id_tarjeta,id_parq,CURDATE(),CURTIME(),NULL,NULL);
 					CALL calcularTiempoApertura((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = id_parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),tiemp);
 					SELECT 'APERTURA' AS Operacion, 'EXITO' AS Resultado, tiemp AS Tiempo ;
 				ELSE
-					SELECT 'Error saldo insuficiente' AS Resultado;				
+					SELECT 'Error saldo insuficiente' AS Operacion;				
 				END IF;		
 			END IF;
 		ELSE
-			SELECT 'Error el parquimetro no existe' AS Resultado;
+			SELECT 'Error el parquimetro no existe' AS Operacion;
 		END IF;
 	ELSE
-		SELECT 'Error la tarjeta no existe' AS Resultado;
+		SELECT 'Error la tarjeta no existe' AS Operacion;
 	END IF;
 COMMIT;
 END; !
@@ -275,7 +276,6 @@ CREATE PROCEDURE calcularSaldo(IN saldo DECIMAL(16,2), IN tiempo INT, IN tarifa 
 BEGIN
     
     SET s = saldo - (tiempo * tarifa * (1-descuento)) ;
-	SELECT S AS calculosaldo,saldo as saldoviejo;
 
 END;!	
 	
@@ -286,7 +286,7 @@ BEGIN
 	IF (tarifa > 0) THEN 		
 		SET tiempo = saldo / (tarifa * (1-descuento));		
 	ELSE
-		SELECT 'Error no existe valor de tarifa;' AS Resultado;
+		SELECT 'Error no existe valor de tarifa;' AS Operacion;
 	END IF;
 
 END;!	

@@ -155,49 +155,12 @@ public class Simulador extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(10, 218, 477, 198);
 		contentPane.add(panel_3);
-        panel_3.setLayout(null);
-		
-		
-        /*tabla = new DBTable();
-        tabla.setBounds(10, 5, 456, 193);
-        panel_3.add(tabla);
-        tabla.getTable().setBounds(3, 28, 300, 0);
-        
-       tabla.setEditable(false);       
-       tabla.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));
-       tabla.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-       tabla.setVisible(true);*/
+        panel_3.setLayout(null);		
+
 	}
 	
 	
-	/*private void conectar(String parquimetro,String tarjeta)
-	{
-	       try {
-	    	   
-				tabla.connectDatabase(c.getdriver(),c.uri(),c.getUser(),c.getPass());
-				
-	       } catch (Exception e1) {
-				System.out.println(e1.getMessage()+"codigo");
-			}
-					
-					
-		
-		
-		String consulta = "CALL conectar("+tarjeta+","+parquimetro+");";
-		System.out.println(consulta);
-		tabla.setSelectSql(consulta);
-	
-		
-		try {
-			tabla.createColumnModelFromQuery();
-			tabla.refresh();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage()+"conectar");
-		}
 
-	}*/
 	
 	private void conectar(String parquimetro,String tarjeta)
 	{	String operacion="";
@@ -216,25 +179,22 @@ public class Simulador extends JFrame {
 			String consulta = "CALL conectar("+tarjeta+","+parquimetro+");";; 
 
 			// Se ejecuta la sentencia y se recibe un resultado
-			java.sql.ResultSet rs = stmt.executeQuery(consulta);
-
-            
+			java.sql.ResultSet rs = stmt.executeQuery(consulta);            
 			
 			if (rs.next())				
-			   operacion = rs.getString("Operacion");
-			else System.out.println("pepe");
+			   operacion = rs.getString("Operacion");			
 			
-			/*if (operacion.equals("CIERRE")) {
+			if (operacion.equals("CIERRE")) {
 				   tiempo=rs.getString("Tiempo");
 				   saldo=rs.getString("Saldo");
-				   JOptionPane.showMessageDialog(this,"ESTUVO "+ tiempo +" ESTACIONADO Y LE QUEDA DE SALDO "+ saldo +".");
+				   JOptionPane.showMessageDialog(this,"ESTUVO "+ tiempo +" MINUTOS ESTACIONADO Y LE QUEDA DE SALDO "+ saldo +".");
 			}
 			else if (operacion.equals("APERTURA")) {
 			        resultado=rs.getString("Resultado");
 			        tiempo=rs.getString("Tiempo");
 			        JOptionPane.showMessageDialog(this,"LA APERTURA SE REALIZO CON "+ resultado +", TIENE "+ tiempo +" MINUTOS PARA ESTAR ESTACIONADO.");
 			       }	
-			    else JOptionPane.showMessageDialog(this,operacion);*/
+			    else JOptionPane.showMessageDialog(this,operacion);
 		    
 		}
 		catch (Exception ex) {
