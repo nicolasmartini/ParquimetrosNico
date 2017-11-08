@@ -1,5 +1,3 @@
-DROP DATABASE Parquimetros;
-
 #Se crea la base de datos con el nombre Parquimetros
 CREATE DATABASE Parquimetros;
 
@@ -333,7 +331,11 @@ GRANT SELECT ON Parquimetros.Asociado_con TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Ubicaciones TO 'inspector'@'%';
 
 #Usuario parquimetro que tiene privelegios minimos.
-GRANT EXECUTE ON PROCEDURE Parquimetros.conectar TO 'paquimetro'@'%' IDENTIFIED BY 'parq';
+GRANT EXECUTE ON PROCEDURE Parquimetros.conectar TO 'parquimetro'@'%' IDENTIFIED BY 'parq';
+GRANT SELECT ON Parquimetros.Ubicaciones TO 'parquimetro'@'%';
+GRANT SELECT ON Parquimetros.Tarjetas TO 'parquimetro'@'%';
+GRANT SELECT ON Parquimetros.Parquimetros TO 'parquimetro'@'%';
+GRANT UPDATE ON Parquimetros.Estacionamientos TO 'parquimetro'@'%';
 
 
 
