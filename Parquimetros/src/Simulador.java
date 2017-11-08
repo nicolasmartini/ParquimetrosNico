@@ -200,7 +200,10 @@ public class Simulador extends JFrame {
 	}*/
 	
 	private void conectar(String parquimetro,String tarjeta)
-	{	String toRet="";
+	{	String operacion="";
+	    String resultado="";
+	    String tiempo="";
+	    String saldo="";
 	  
 	
 		try
@@ -217,17 +220,21 @@ public class Simulador extends JFrame {
 
             
 			
-			 rs.next();				
-			 String operacion = rs.getString("Operacion");
+			if (rs.next())				
+			   operacion = rs.getString("Operacion");
+			else System.out.println("pepe");
 			
-			
-			if (toRet.equals("APERTURA")) {
-				
-				toRet = rs.getString("Operacion")+rs.getString("Operacion");
+			/*if (operacion.equals("CIERRE")) {
+				   tiempo=rs.getString("Tiempo");
+				   saldo=rs.getString("Saldo");
+				   JOptionPane.showMessageDialog(this,"ESTUVO "+ tiempo +" ESTACIONADO Y LE QUEDA DE SALDO "+ saldo +".");
 			}
-
-			//JOptionPane.showMessageDialog(this,toRet);
-			JOptionPane.showMessageDialog(this,toRet);
+			else if (operacion.equals("APERTURA")) {
+			        resultado=rs.getString("Resultado");
+			        tiempo=rs.getString("Tiempo");
+			        JOptionPane.showMessageDialog(this,"LA APERTURA SE REALIZO CON "+ resultado +", TIENE "+ tiempo +" MINUTOS PARA ESTAR ESTACIONADO.");
+			       }	
+			    else JOptionPane.showMessageDialog(this,operacion);*/
 		    
 		}
 		catch (Exception ex) {
