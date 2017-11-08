@@ -165,8 +165,8 @@ public class Simulador extends JFrame {
        tabla.setVisible(true);
        try {
     	   
-			tabla.connectDatabase(c.getdriver(),c.uri(),c.getUser(),c.getPass());
-			
+			tabla.connectDatabase(c.getdriver(),c.uri(),c.getUser(),cL.getPass());
+			//conMySQL.Conectar("parquimetro", "parq");
        } catch (Exception e1) {
 			System.out.println(e1.getMessage()+"codigo");
 		}

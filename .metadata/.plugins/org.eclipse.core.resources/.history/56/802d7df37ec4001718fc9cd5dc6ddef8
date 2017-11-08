@@ -164,11 +164,9 @@ public class Simulador extends JFrame {
        tabla.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
        tabla.setVisible(true);
        try {
-    	   
-			tabla.connectDatabase(c.getdriver(),c.uri(),c.getUser(),c.getPass());
-			
-       } catch (Exception e1) {
-			System.out.println(e1.getMessage()+"codigo");
+			tabla.connectDatabase(conMySQL.getdriver(),conMySQL.uri(),conMySQL.getUser(),conMySQL.getPass());
+		} catch (Exception e1) {
+			System.out.println(e1.getMessage());
 		}
 				
 				
@@ -185,7 +183,7 @@ public class Simulador extends JFrame {
 			tabla.refresh();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage()+"conectar");
+			System.out.println(e.getMessage());
 		}
 
 	}
