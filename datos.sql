@@ -52,32 +52,32 @@ INSERT INTO Inspectores VALUES (47241, 155631289, "Gustavo", "Agenta",md5("inspe
 INSERT INTO Inspectores VALUES (78234, 156871211, "Carlos", "Perez",md5("inspector"));
 
 #Se insertan datos a la tabla Ubicaciones
-INSERT INTO Ubicaciones VALUES ("Sarmiento", 583, 0.5);
-INSERT INTO Ubicaciones VALUES ("Sarmiento", 844, 0.5);
-INSERT INTO Ubicaciones VALUES ("Estomba", 433, 102.42);
-INSERT INTO Ubicaciones VALUES ("Estomba", 782 , 102.44);
-INSERT INTO Ubicaciones VALUES ("Chiclana", 1289, 103.35);
-INSERT INTO Ubicaciones VALUES ("Chiclana", 1002, 103.46);
-INSERT INTO Ubicaciones VALUES ("Donado", 583, 103.44);
-INSERT INTO Ubicaciones VALUES ("Donado", 1423, 105.32);
-INSERT INTO Ubicaciones VALUES ("Beruti", 1823, 103.44);
-INSERT INTO Ubicaciones VALUES ("Beruti", 1724, 103.66);
-INSERT INTO Ubicaciones VALUES ("Colon", 1832, 103.44);
-INSERT INTO Ubicaciones VALUES ("Colon", 1932, 103.55);
+INSERT INTO Ubicaciones VALUES ("Sarmiento", 583,0.5);
+INSERT INTO Ubicaciones VALUES ("Sarmiento", 844,0.5);
+INSERT INTO Ubicaciones VALUES ("Estomba", 433,0.5);
+INSERT INTO Ubicaciones VALUES ("Estomba", 782 ,0.5);
+INSERT INTO Ubicaciones VALUES ("Chiclana", 1289,0.5);
+INSERT INTO Ubicaciones VALUES ("Chiclana", 1002,0.5);
+INSERT INTO Ubicaciones VALUES ("Donado", 583,0.5);
+INSERT INTO Ubicaciones VALUES ("Donado", 1423,0.5);
+INSERT INTO Ubicaciones VALUES ("Beruti", 1823,0.5);
+INSERT INTO Ubicaciones VALUES ("Beruti", 1724,0.5);
+INSERT INTO Ubicaciones VALUES ("Colon", 1832,0.5);
+INSERT INTO Ubicaciones VALUES ("Colon", 1932,0.5);
 
 #Se insertan datos a la tabla Parquimetros
-INSERT INTO Parquimetros VALUES (1,2,"Sarmiento", 583);
-INSERT INTO Parquimetros VALUES (2,4,"Sarmiento", 844);
-INSERT INTO Parquimetros VALUES (3,6,"Estomba", 433);
-INSERT INTO Parquimetros VALUES (4,8,"Estomba", 782);
-INSERT INTO Parquimetros VALUES (5,10,"Chiclana", 1289);
-INSERT INTO Parquimetros VALUES (6,12,"Chiclana", 1002);
-INSERT INTO Parquimetros VALUES (7,14,"Donado", 583);
-INSERT INTO Parquimetros VALUES (8,16,"Donado", 1423);
-INSERT INTO Parquimetros VALUES (9,18,"Beruti", 1823);
-INSERT INTO Parquimetros VALUES (10,20,"Beruti", 1724);
-INSERT INTO Parquimetros VALUES (11,22,"Colon", 1832);
-INSERT INTO Parquimetros VALUES (12,24,"Colon", 1932);
+INSERT INTO Parquimetros VALUES (1,2,"Sarmiento",583);
+INSERT INTO Parquimetros VALUES (2,4,"Sarmiento",844);
+INSERT INTO Parquimetros VALUES (3,6,"Estomba",433);
+INSERT INTO Parquimetros VALUES (4,8,"Estomba",782);
+INSERT INTO Parquimetros VALUES (5,10,"Chiclana",1289);
+INSERT INTO Parquimetros VALUES (6,12,"Chiclana",1002);
+INSERT INTO Parquimetros VALUES (7,14,"Donado",583);
+INSERT INTO Parquimetros VALUES (8,16,"Donado",1423);
+INSERT INTO Parquimetros VALUES (9,18,"Beruti",1823);
+INSERT INTO Parquimetros VALUES (10,20,"Beruti",1724);
+INSERT INTO Parquimetros VALUES (11,22,"Colon",1832);
+INSERT INTO Parquimetros VALUES (12,24,"Colon",1932);
 
 #Se insertan datos a la tabla Estacionamientos
 INSERT INTO Estacionamientos VALUES (0001,1,'2017:11:6','18:00:00',NULL,NULL);

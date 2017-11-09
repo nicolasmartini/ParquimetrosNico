@@ -51,13 +51,13 @@ public class Gui {
 		
 		frame = new JFrame();		
 		frame.getContentPane().setBackground(Color.WHITE);
-		frame.getContentPane().setForeground(Color.BLACK);	
+		frame.getContentPane().setForeground(Color.BLACK);
+		frame.setSize(800,600);
 		frame.setSize(800, 600);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));

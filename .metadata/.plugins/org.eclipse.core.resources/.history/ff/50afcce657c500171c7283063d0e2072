@@ -12,10 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-
+import Login.Oyente2;
 import quick.dbtable.DBTable;
 
 import javax.swing.JList;
@@ -46,12 +45,6 @@ public class Simulador extends JFrame {
 	 * Create the frame.
 	 */
 	public Simulador(String usuario, String contraseña) {
-		
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 	      c = new ConexionMySQL ();
 	     if (c.Conectar(usuario,contraseña)== null){
@@ -161,8 +154,8 @@ public class Simulador extends JFrame {
 		contentPane.add(lblParquimetros);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(195, 267, 89, 23);
-		contentPane.add(btnVolver);
+		btnVolver.setBounds(159, 194, 89, 23);
+		panel.add(btnVolver);
 		btnVolver.addActionListener(new Oyente());
 	 
 

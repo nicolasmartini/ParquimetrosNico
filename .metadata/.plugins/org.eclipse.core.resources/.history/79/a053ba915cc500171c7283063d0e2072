@@ -32,13 +32,13 @@ public class Usuario extends JFrame {
 	}
 	
 	public Usuario(){
-		getContentPane().setBackground(Color.white);		
+		getContentPane().setBackground(Color.white);
+		
+		
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setSize(450, 300);
-		setResizable(false);
-		setLocationRelativeTo(null);
+		setBounds(100, 100, 450, 300);
 		JButton Administrador = new JButton("Administrador");
 		Administrador.setBounds(147, 50, 140, 58);
 		getContentPane().add(Administrador);

@@ -238,7 +238,7 @@ BEGIN
 	DECLARE tiemp INT; 
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
-		SELECT 'SQLEXCEPTION!, Transacción cancelada' AS Operacion;
+		SELECT 'SQLEXCEPTION!, TRANSACION CANCELADA' AS Operacion;
 		ROLLBACK;
 	END;
 	START TRANSACTION;
@@ -260,14 +260,14 @@ BEGIN
 					CALL calcularTiempoApertura((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = id_parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),tiemp);
 					SELECT 'APERTURA' AS Operacion, 'EXITO' AS Resultado, tiemp AS Tiempo ;
 				ELSE
-					SELECT 'Error saldo insuficiente' AS Operacion;				
+					SELECT 'ERROR SALDO INSUFICIENTE' AS Operacion;				
 				END IF;		
 			END IF;
 		ELSE
-			SELECT 'Error el parquimetro no existe' AS Operacion;
+			SELECT 'ERROR EL PARQUIMETRO NO EXISTE' AS Operacion;
 		END IF;
 	ELSE
-		SELECT 'Error la tarjeta no existe' AS Operacion;
+		SELECT 'ERROR LA TARJETA NO EXISTE' AS Operacion;
 	END IF;
 COMMIT;
 END; !

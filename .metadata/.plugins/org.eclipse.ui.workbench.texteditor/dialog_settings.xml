@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="CBAlturas" key="selection"/>
+		<item value="Frame" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="frame"/>
+			<item value="Oyente2"/>
+			<item value="btnVolver"/>
+			<item value="volver"/>
+			<item value="dialog"/>
+			<item value="refrescarTablaMultas"/>
+			<item value="conMySQL"/>
+			<item value="conexion"/>
+			<item value="tabla"/>
+			<item value="ids"/>
+			<item value="obtenerNroParquimetros"/>
+			<item value="obtenerUbicaciones"/>
 			<item value="CBAlturas"/>
 			<item value="calles"/>
 			<item value="parquimetros"/>
-			<item value="CBParquimetros"/>
-			<item value="actualizarParquimetros"/>
-			<item value="alturas"/>
-			<item value="actualizarAlturas"/>
-			<item value="actualizarIds"/>
-			<item value="obtenerCalles"/>
-			<item value="ids"/>
-			<item value="numeros"/>
-			<item value="CBUbicaciones"/>
-			<item value="obtenerUbicaciones"/>
-			<item value="obtenerAlturas"/>
-			<item value="ubicaciones"/>
 		</list>
 		<list key="replacehistory">
 			<item value="CBCalles"/>
@@ -31,8 +31,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="526" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="765" key="DIALOG_HEIGHT"/>
-		<item value="513" key="DIALOG_X_ORIGIN"/>
-		<item value="8" key="DIALOG_Y_ORIGIN"/>
+		<item value="557" key="DIALOG_HEIGHT"/>
+		<item value="359" key="DIALOG_X_ORIGIN"/>
+		<item value="192" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

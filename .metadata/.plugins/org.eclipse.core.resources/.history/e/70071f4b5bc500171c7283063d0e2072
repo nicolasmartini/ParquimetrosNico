@@ -1,8 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -51,13 +49,13 @@ public class Gui {
 		
 		frame = new JFrame();		
 		frame.getContentPane().setBackground(Color.WHITE);
-		frame.getContentPane().setForeground(Color.BLACK);	
-		frame.setSize(800, 600);
-		frame.setResizable(false);
+		frame.getContentPane().setForeground(Color.BLACK);
+		frame.setBounds(100, 100, 800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, null, null, null));

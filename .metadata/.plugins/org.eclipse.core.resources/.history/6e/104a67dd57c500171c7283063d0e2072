@@ -12,9 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-
 
 import quick.dbtable.DBTable;
 
@@ -47,12 +45,6 @@ public class Simulador extends JFrame {
 	 */
 	public Simulador(String usuario, String contraseña) {
 		
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 	      c = new ConexionMySQL ();
 	     if (c.Conectar(usuario,contraseña)== null){
 	    	 System.out.println("error no se pudo conectar");
@@ -65,7 +57,7 @@ public class Simulador extends JFrame {
 
 	    tarjetas = obtenerTarjetas();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 513, 340);
+		setBounds(100, 100, 513, 487);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -159,12 +151,6 @@ public class Simulador extends JFrame {
 		JLabel lblParquimetros = new JLabel("Parquimetros");
 		lblParquimetros.setBounds(379, 11, 85, 14);
 		contentPane.add(lblParquimetros);
-		
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(195, 267, 89, 23);
-		contentPane.add(btnVolver);
-		btnVolver.addActionListener(new Oyente());
-	 
 
 	}
 	
@@ -315,14 +301,4 @@ public class Simulador extends JFrame {
 
 		return toRet;
 	}
-	
-	class Oyente implements ActionListener{
-		 public void actionPerformed(ActionEvent e)
-				 {
-					 setVisible(false);
-					 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					 Usuario u =new Usuario();  
-				 }
-		}
-	
 }
