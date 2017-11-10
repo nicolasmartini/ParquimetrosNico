@@ -37,7 +37,7 @@ INSERT INTO Tarjetas VALUES(0006,220.00,"Discapacitado","AQG678");
 INSERT INTO Tarjetas VALUES(0007,050.50,"Jubilado","RMB123");
 INSERT INTO Tarjetas VALUES(0008,180.00,"Jubilado","AQD678");
 INSERT INTO Tarjetas VALUES(0009,220.00,"Discapacitado","SYO123");
-INSERT INTO Tarjetas VALUES(0010,050.50,"Estudiante","WTP123");
+INSERT INTO Tarjetas VALUES(0010,400.50,"Estudiante","WTP123");
 
 #Se insertan datos a la tabla Inspectores
 INSERT INTO Inspectores VALUES (98244, 154182544, "Luis", "Gonzales",md5("inspector"));
@@ -89,7 +89,7 @@ INSERT INTO Estacionamientos VALUES (0006,6,'2014:05:05','18:42:45','2014:05:05'
 INSERT INTO Estacionamientos VALUES (0007,7,'2014:06:20','09:30:00',NULL,NULL);
 INSERT INTO Estacionamientos VALUES (0008,8,'2014:07:06','18:40:00',NULL,NULL);
 INSERT INTO Estacionamientos VALUES (0009,9,'2014:07:19','18:40:00','2014:07:20','09:22:01');
-INSERT INTO Estacionamientos VALUES (0010,10,'2014:08:03','10:15:05',NULL,NULL);
+INSERT INTO Estacionamientos VALUES (0010,10,'2017:11:10','10:15:05',NULL,NULL);
 
 #Se insertan datos a la tabla Asociado_con
 INSERT INTO Asociado_con VALUES (1,98244, "Sarmiento", 844, 'Lu', 'T');
