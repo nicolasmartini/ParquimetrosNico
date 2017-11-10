@@ -49,9 +49,6 @@ public class Simulador extends JFrame {
 		
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 	      c = new ConexionMySQL ();
 	     if (c.Conectar(usuario,contraseña)== null){
@@ -64,8 +61,13 @@ public class Simulador extends JFrame {
 	    parquimetros  = new DefaultComboBoxModel<>();
 
 	    tarjetas = obtenerTarjetas();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 513, 340);
+	    
+
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		setSize(513, 340);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -164,6 +166,11 @@ public class Simulador extends JFrame {
 		btnVolver.setBounds(195, 267, 89, 23);
 		contentPane.add(btnVolver);
 		btnVolver.addActionListener(new Oyente());
+		}catch (Exception e) {
+			
+			JOptionPane.showMessageDialog(this,"No fue posible conectarse a la BD");
+			
+		}
 	 
 
 	}
