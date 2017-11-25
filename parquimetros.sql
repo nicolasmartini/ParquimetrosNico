@@ -241,23 +241,19 @@ BEGIN
 	BEGIN		
 		SELECT 'SQLEXCEPTION!, TRANSACION CANCELADA' AS Operacion;
 		ROLLBACK;
-	END;
-	
-	SELECT saldo FROM tarjetas for update;
+	END;	
 	
 	START TRANSACTION;
 	
 	IF EXISTS (SELECT * FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta) THEN
 		IF EXISTS (SELECT * FROM parquimetros AS P WHERE P.id_parq = id_parq) THEN	   
 			
-			IF EXISTS (SELECT * FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL)  THEN
+			IF EXISTS (SELECT * FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL )  THEN
 			    
-				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),(SELECT hora_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),tiemp);				 
+				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL for update),(SELECT hora_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL for update),tiemp);				 
 				CALL obtenerParq(id_tarjeta,parq);
-				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
-				
-				SELECT * FROM  Estacionamientos E WHERE E.id_parq = parq AND E.id_tarjeta = id_tarjeta for update;
-				
+				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta for update),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
+												
 				UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = parq AND E.id_tarjeta = id_tarjeta;
 				UPDATE Tarjetas AS T SET saldo = saldo_actual WHERE T.id_tarjeta = id_tarjeta ; 
 				SELECT 'CIERRE' AS Operacion, tiemp AS Tiempo,saldo_actual AS Saldo ;
