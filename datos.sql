@@ -80,7 +80,7 @@ INSERT INTO Parquimetros VALUES (11,22,"Colon",1832);
 INSERT INTO Parquimetros VALUES (12,24,"Colon",1932);
 
 #Se insertan datos a la tabla Estacionamientos
-INSERT INTO Estacionamientos VALUES (0001,1,'2017:11:6','18:00:00',NULL,NULL);
+INSERT INTO Estacionamientos VALUES (0001,1,'2017:11:24','19:30:00',NULL,NULL);
 INSERT INTO Estacionamientos VALUES (0002,2,'2014:03:20','13:32:45','2014:03:20','18:40:00');
 INSERT INTO Estacionamientos VALUES (0003,3,'2014:04:27','09:30:00',NULL,NULL);
 INSERT INTO Estacionamientos VALUES (0004,4,'2014:05:02','07:32:32',NULL,NULL);
@@ -103,6 +103,7 @@ INSERT INTO Asociado_con VALUES (8,58812, "Donado", 1423, 'Mi', 'T');
 INSERT INTO Asociado_con VALUES (9,47241, "Beruti", 1823, 'Ju', 'T');
 INSERT INTO Asociado_con VALUES (10,78234, "Beruti", 1724, 'Vi', 'T');
 INSERT INTO Asociado_con VALUES (13,98244, "Sarmiento", 583, 'Ma', 'M');
+INSERT INTO Asociado_con VALUES (14,98244, "Sarmiento", 583, 'Vi', 'T');
 
 #Se insertan datos a la tabla Multa
 INSERT INTO Multa VALUES (1,'2014:03:12','13:32:45',"LIL345",1);

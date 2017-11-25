@@ -9,6 +9,54 @@
       <title>eclipse.org</title>
       <link>http://www.eclipse.org</link>
     </image>
+    <item>
+      <title><![CDATA[Eclipse Newsletter | Location Matters]]></title>
+      <link><![CDATA[https://www.eclipse.org/community/eclipse_newsletter/2017/november/]]></link>
+      <description><![CDATA[This newsletter is everything geospacial (LocationTech) + a featured article about creating video games.]]></description>
+      <pubDate>Wed, 22 Nov 2017 06:23:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>0</pressrelease>
+    </item>
+    <item>
+      <title><![CDATA[Open IoT Challenge 4.0 | Extended Deadline Nov 20]]></title>
+      <link><![CDATA[http://iot.eclipse.org/open-iot-challenge/]]></link>
+      <description><![CDATA[One last week to submit your open IoT solution idea. You can then work on it until March 15. Submit now!]]></description>
+      <pubDate>Wed, 15 Nov 2017 05:30:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>0</pressrelease>
+    </item>
+    <item>
+      <title><![CDATA[EclipseCon + Ludwigsburg = Great Partners]]></title>
+      <link><![CDATA[https://www.eclipsecon.org/europe2017/news/eclipsecon-ludwigsburg-great-partners]]></link>
+      <description><![CDATA[We are pleased to announce a strategic partnership between the Eclipse Foundation Europe and the City of Ludwigsburg that keeps EclipseCon Europe at the Forum am Schlosspark through 2019.]]></description>
+      <pubDate>Sun, 22 Oct 2017 08:00:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>0</pressrelease>
+    </item>
+    <item>
+      <title><![CDATA[New Industry 4.0 Open Testbed Addresses Performance Monitoring and Management in Manufacturing]]></title>
+      <link><![CDATA[https://eclipse.org/org/press-release/20171019_industry40_testbed.php]]></link>
+      <description><![CDATA[Bosch Software Innovations, CONTACT Software, Eurotech, fortiss GmbH, and InfluxData collaborate to demonstrate Product Performance Management.]]></description>
+      <pubDate>Thu, 19 Oct 2017 11:00:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>1</pressrelease>
+    </item>
+    <item>
+      <title><![CDATA[Eclipse Science Advances Open Source Technology for Scientific Research]]></title>
+      <link><![CDATA[https://www.eclipse.org/org/press-release/20171018_scienceopensource.php]]></link>
+      <description><![CDATA[The Eclipse Science Working Group, a working group of the Eclipse Foundation, today announced the new releases of five open source projects used by the scientific research community.]]></description>
+      <pubDate>Wed, 18 Oct 2017 09:00:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>1</pressrelease>
+    </item>
+     <item>
+      <title><![CDATA[Eclipse Newsletter | Utility Belt: Projects and Tools]]></title>
+      <link><![CDATA[https://www.eclipse.org/community/eclipse_newsletter/2017/october/]]></link>
+      <description><![CDATA[Learn about JUnit 5, e4 on JavaFX, scripting with EASE, embedded tools and Eclipse CDT, Ferret search tool, and software ethics.]]></description>
+      <pubDate>Wed, 18 Oct 2017 05:02:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>0</pressrelease>
+    </item>
      <item>
       <title><![CDATA[On Naming Eclipse Enterprise for Java (EE4J)]]></title>
       <link><![CDATA[https://mmilinkov.wordpress.com/2017/09/30/on-naming/]]></link>
@@ -66,7 +114,7 @@
       <pressrelease>0</pressrelease>
     </item>
     <item>
-      <title><![CDATA[Eclipse Newsletter - Eclipse MicroProfile]]></title>
+      <title><![CDATA[Eclipse Newsletter | Eclipse MicroProfile]]></title>
       <link><![CDATA[https://www.eclipse.org/community/eclipse_newsletter/2017/september/]]></link>
       <description><![CDATA[In the September issue of the Eclipse Newsletter, discover everything you need to know about Eclipse MicroProfile.]]></description>
       <pubDate>Wed, 20 Sep 2017 10:30:00 EST</pubDate>
@@ -98,7 +146,7 @@
       <pressrelease>0</pressrelease>
     </item>
     <item>
-      <title><![CDATA[Eclipse Newsletter - Exciting New Eclipse Projects]]></title>
+      <title><![CDATA[Eclipse Newsletter | Exciting New Eclipse Projects]]></title>
       <link><![CDATA[https://www.eclipse.org/community/eclipse_newsletter/2017/august/]]></link>
       <description><![CDATA[The latest newsletter is all about new and exciting projects!]]></description>
       <pubDate>Tue, 22 Aug 2017 09:00:00 EST</pubDate>
@@ -138,7 +186,7 @@
       <pressrelease>0</pressrelease>
     </item> 
     <item>
-      <title><![CDATA[Eclipse Newsletter - Summer Issue]]></title>
+      <title><![CDATA[Eclipse Newsletter | Summer Issue]]></title>
       <link><![CDATA[https://www.eclipse.org/community/eclipse_newsletter/2017/july/]]></link>
       <description><![CDATA[The latest Eclipse Newsletter is now available. Read it and learn how to try out Java 9 Support for Eclipse Oxygen!]]></description>
       <pubDate>Tue, 25 Jul 2017 10:05:00 EST</pubDate>
@@ -162,7 +210,7 @@
       <pressrelease>0</pressrelease>
     </item> 
     <item>
-      <title><![CDATA[Eclipse Newsletter - Eclipse Oxygen]]></title>
+      <title><![CDATA[Eclipse Newsletter | Eclipse Oxygen]]></title>
       <link><![CDATA[https://www.eclipse.org/community/eclipse_newsletter/2017/june/]]></link>
       <description><![CDATA[Find out more about the latest Eclipse Simultaneous Release in the June issue of the Eclipse Newsletter!]]></description>
       <pubDate>Wed, 28 Jun 2017 10:26:00 EST</pubDate>

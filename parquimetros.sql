@@ -235,22 +235,30 @@ CREATE PROCEDURE conectar(IN id_tarjeta INTEGER , IN id_parq INTEGER)
 BEGIN		
 
 	DECLARE saldo_actual DECIMAL(16,2);
-	DECLARE tiemp INT; 
+	DECLARE tiemp INT;
+    DECLARE parq INT;	
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
-	BEGIN
+	BEGIN		
 		SELECT 'SQLEXCEPTION!, TRANSACION CANCELADA' AS Operacion;
 		ROLLBACK;
 	END;
+	
+	SELECT saldo FROM tarjetas for update;
+	
 	START TRANSACTION;
 	
 	IF EXISTS (SELECT * FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta) THEN
 		IF EXISTS (SELECT * FROM parquimetros AS P WHERE P.id_parq = id_parq) THEN	   
 			
-			IF EXISTS (SELECT * FROM estacionamientos AS E WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL)  THEN
+			IF EXISTS (SELECT * FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL)  THEN
 			    
-				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE  E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),(SELECT hora_ent FROM estacionamientos AS E WHERE  E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),tiemp);				 
-				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = id_parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
-				UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = id_parq AND E.id_tarjeta = id_tarjeta;
+				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),(SELECT hora_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),tiemp);				 
+				CALL obtenerParq(id_tarjeta,parq);
+				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
+				
+				SELECT * FROM  Estacionamientos E WHERE E.id_parq = parq AND E.id_tarjeta = id_tarjeta for update;
+				
+				UPDATE Estacionamientos E SET fecha_sal = CURDATE(),hora_sal =CURTIME() WHERE E.id_parq = parq AND E.id_tarjeta = id_tarjeta;
 				UPDATE Tarjetas AS T SET saldo = saldo_actual WHERE T.id_tarjeta = id_tarjeta ; 
 				SELECT 'CIERRE' AS Operacion, tiemp AS Tiempo,saldo_actual AS Saldo ;
 					
@@ -277,7 +285,14 @@ BEGIN
     
     SET s = saldo - (tiempo * tarifa * (1-descuento)) ;
 
-END;!	
+END;!
+
+CREATE PROCEDURE obtenerParq(IN id_tarjeta INTEGER,OUT parq INTEGER )
+BEGIN
+    
+   SET parq=(SELECT id_parq  FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL);
+
+END;!		
 	
 
 CREATE PROCEDURE calcularTiempoApertura(IN saldo DECIMAL(16,2), IN tarifa DECIMAL(16,2), IN descuento DECIMAL(16,2), OUT tiempo DECIMAL(16,2) )
@@ -329,6 +344,7 @@ GRANT SELECT ON Parquimetros.Inspectores TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Parquimetros TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Asociado_con TO 'inspector'@'%';
 GRANT SELECT ON Parquimetros.Ubicaciones TO 'inspector'@'%';
+GRANT SELECT ON Parquimetros.Automoviles TO 'inspector'@'%';
 
 #Usuario parquimetro que tiene privelegios minimos.
 GRANT EXECUTE ON PROCEDURE Parquimetros.conectar TO 'parquimetro'@'%' IDENTIFIED BY 'parq';

@@ -316,13 +316,17 @@ public class UnidadPersonal extends JFrame{
 		try {
 			String pat;
 			java.sql.Statement stmt;
-			String sql1;
-			java.sql.ResultSet rs;
+			String sql1,sql2;
+			java.sql.ResultSet rs,rs1;
 			String ins = "INSERT INTO multa(fecha,hora,patente,id_asociado_con) VALUES(?,?,?,?);";
 			// Se crea un sentencia preparada
 			java.sql.PreparedStatement stmt2 = conexion.prepareStatement(ins);
 			int flag=0;
 			String patenteslist="";
+			
+			int flag2=0;
+			String noregistradoslist="";
+			
 			for(int i = 0 ; i < patentes.size() ; i++) {
 				pat = patentes.elementAt(i).toString();
 				
@@ -332,13 +336,24 @@ public class UnidadPersonal extends JFrame{
 				sql1 = "select * from estacionados where patente= '" +pat+ "' and calle = '"+calle+"' and altura = "+altura+";";
 				rs = stmt.executeQuery(sql1);
 				
-				if(!rs.next()) {
+				if(!rs.next()) {					
+
+					// Se prepara el string SQL de la consulta
+					sql2 = "select * from automoviles where patente= '" +pat+ "'"+";";
+					rs1 = stmt.executeQuery(sql2);
+					if(!rs1.next()) {
+						flag2++;
+						noregistradoslist=noregistradoslist + " " + pat;
+						
+					}else {
+					
 					// Se ligan los parámetros efectivos
 					stmt2.setDate(1, fecha);
 					stmt2.setString(2, hora);
 					stmt2.setString(3, pat);
 					stmt2.setInt(4, id);
 					stmt2.executeUpdate();
+					}
 				}else {
 					   flag++;
 					   patenteslist=patenteslist + " " + pat;
@@ -353,6 +368,15 @@ public class UnidadPersonal extends JFrame{
 			else if (flag>1)
 			        {
 				      JOptionPane.showMessageDialog(this,"No corrresponde multar a las patentes: " + patenteslist,"Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+			        }
+			
+			if (flag2==1)
+			{
+				JOptionPane.showMessageDialog(this,"La patente " + noregistradoslist+" no esta registrada en el sistema","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+			}
+			else if (flag2>1)
+			        {
+				      JOptionPane.showMessageDialog(this,"Las patentes: " + noregistradoslist+ " no estan registradas en le sistema","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 			        }
 			
 			refrescarTablaMultas(fecha,hora,id);
