@@ -250,7 +250,7 @@ BEGIN
 			
 			IF EXISTS (SELECT * FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL )  THEN
 			    
-				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL for update),(SELECT hora_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL for update),tiemp);				 
+				CALL calcularTiempoCierre((SELECT fecha_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL for update),(SELECT hora_ent FROM estacionamientos AS E WHERE E.id_tarjeta = id_tarjeta AND E.fecha_sal IS NULL AND E.hora_sal IS NULL),tiemp);				 
 				CALL obtenerParq(id_tarjeta,parq);
 				CALL calcularSaldo((SELECT saldo FROM tarjetas AS T WHERE T.id_tarjeta = id_tarjeta for update),tiemp,(SELECT tarifa FROM ubicaciones NATURAL JOIN parquimetros AS P WHERE P.id_parq = parq),(SELECT descuento FROM tarjetas AS T NATURAL JOIN tipos_tarjeta WHERE T.id_tarjeta = id_tarjeta),saldo_actual);
 												
