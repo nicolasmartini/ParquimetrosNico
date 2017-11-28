@@ -4,10 +4,11 @@
 	<section name="FatJarPackageWizard">
 		<item value="C:\Users\Nicolás Martini\Documents\GitHub\ParquimetrosNico" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="Usuario - Parquimetros" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\Nicolás Martini\Desktop\ParquimetrosE3.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="C:\Users\Nicolás Martini\Desktop\ParquimetrosEF.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="2" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Nicolás Martini\Desktop\ParquimetrosEF.jar"/>
 			<item value="C:\Users\Nicolás Martini\Desktop\ParquimetrosE3.jar"/>
 			<item value="C:\Users\Nicolás Martini\Desktop\Parquimetros.jar"/>
 		</list>
